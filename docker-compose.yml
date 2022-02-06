@@ -61,7 +61,7 @@ services:
     tty: true
   mailhog:
     container_name: bas_mailhog
-    image: "mailhog/mailhog"
+    image: "mailhog/mailhog:v1.0.1"
     ports:
       - "8025:8025"
     tty:
