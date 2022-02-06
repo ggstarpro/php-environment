@@ -6,7 +6,6 @@ WORKDIR /usr/share/nginx/html
 RUN apk update \
   && apk add bash curl \
   && adduser -D nginx \
-  # && addgroup nginx
   && chown -R nginx:nginx /usr/share/nginx/html \
   && apk add openrc \
   && mkdir /var/run/php-fpm /var/log/php-fpm \
@@ -23,16 +22,17 @@ RUN apk update \
 
 # 必要なモジュールインストール (PHP 8)
 RUN apk add --update --no-cache php8 php8-fpm php8-pdo_mysql \
-            php8-curl \
-            php8-opcache php8-pdo_odbc php8-pdo_mysql php8-gd \
-            php8-pecl-apcu php8-mysqli php8-fpm \
-            php8-zip php8-curl php8-phar php8-sockets php8-dom \
-            php8-ftp php8-iconv php8-posix \
-            php8-session php8-sodium php8-sqlite3 php8-tokenizer \
-            php8-pear php8-pecl-imagick \
-            php8-bcmath  php8-ctype php8-fileinfo php8-json \
-            php8-mbstring php8-openssl php8-tokenizer \
-            php8-xml php8-xmlreader php8-xmlwriter
+  php8-curl \
+  php8-opcache php8-pdo_odbc php8-pdo_mysql php8-gd \
+  php8-pecl-apcu php8-mysqli php8-fpm \
+  php8-zip php8-curl php8-phar php8-sockets php8-dom \
+  php8-ftp php8-iconv php8-posix \
+  php8-session php8-sodium php8-sqlite3 php8-tokenizer \
+  php8-pear php8-pecl-imagick \
+  php8-bcmath  php8-ctype php8-fileinfo php8-json \
+  php8-mbstring php8-openssl php8-tokenizer \
+  php8-xml php8-xmlreader php8-xmlwriter php8-simplexml \
+  php8-intl
 
 # phpコマンドを作成
 RUN ln /usr/bin/php8 /usr/bin/php
@@ -59,6 +59,11 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
   && php -r "unlink('composer-setup.php');" \
   && chmod +x /usr/local/bin/composer
 # ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ composer ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+
+# 時間修正
+RUN apk --no-cache add tzdata && \
+  cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
+  apk del tzdata
 
 COPY ./docker/php/www.conf /etc/php8/php-fpm.d/www.conf
 COPY ./docker/php/php.ini /etc/php8/php.ini
