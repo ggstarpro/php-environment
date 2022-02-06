@@ -1,0 +1,5 @@
+/database
+/server
+/docker/mysql/tmp
+/docker/mysql/mysql
+!/docker/mysql/tmp/init.sql

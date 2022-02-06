@@ -1,0 +1,52 @@
+version: "3"
+services:
+  nginx:
+    container_name: bas_nginx
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    volumes:
+      - ./server:/usr/share/nginx/html
+    ports:
+      - "80:80"
+    depends_on:
+      - php
+  php:
+    build:
+      context: .
+      dockerfile: ./docker/php/Dockerfile
+    container_name: bas_php
+    volumes:
+      - ./server:/usr/share/nginx/html
+    depends_on:
+      - mysql
+  mysql:
+    container_name: bas_mysql
+    build:
+      context: .
+      dockerfile: ./docker/mysql/Dockerfile
+    ports:
+      - "4306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: bas
+      MYSQL_USER: bas
+      MYSQL_PASSWORD: password
+      TZ: 'Asia/Tokyo'
+    volumes:
+      - ./docker/mysql/tmp:/tmp
+      - ./docker/mysql/mysql:/var/lib/mysql
+      - ./docker/mysql/initdb.d/:/docker-entrypoint-initdb.d
+  # phpmyadmin:
+  #   image: phpmyadmin/phpmyadmin:latest
+  #   ports:
+  #     - 8888:80
+  #   depends_on:
+  #     - db
+
+# docker
+# * git hub に投げる
+# * s3 MinIO
+# * mailhog
+# * phpmyadmin
+# redis

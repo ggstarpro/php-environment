@@ -1,0 +1,43 @@
+
+# EPELリポジトリのインストール
+# RUN apk add epel-release
+
+
+# composerのインストール(失敗した際にエラーを表示する)
+# pathの通った場所へ移動させる
+# RUN curl -sS https://getcomposer.org/installer | php \
+#   && mv composer.phar /usr/local/bin/composer \
+#   && chmod +x /usr/local/bin/composer
+
+# ENV COMPOSER_ALLOW_SUPERUSER 1
+# ENV COMPOSER_HOME /composer
+# ENV PATH $PATH:/composer/vendor/bin
+# タイムゾーン設定
+# ENV TZ=Asia/Tokyo
+
+
+docker exec -it bas_php bash
+
+
+# user nginx
+https://qiita.com/inakadegaebal/items/d59fa99d2ee66a4ffe98#wwwconf%E3%81%AE%E5%A0%B4%E6%89%80
+
+# docker-composeでphp-fpmを使ってphpを動かす方法を紹介
+https://solomaker.club/how-to-use-php-fpm-in-dokcer-compose-yml/
+
+# index.html
+https://www.rk-k.com/archives/4016
+
+# 環境
+https://qiita.com/tomoyamachi/items/991a0d149e9585cac15f
+
+# nginx + php-fpm で PHP だけ File not found. の時の対応
+https://qiita.com/shohei_ot/items/8606c5457533b3532cb2
+
+
+https://qiita.com/kotarella1110/items/3b0bd84fdb55276f37d9
+
+
+
+# PHP FPM の設定
+https://qiita.com/silverskyvicto/items/4eef6723af2d4ed8d5d0
