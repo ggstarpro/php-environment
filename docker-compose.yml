@@ -20,8 +20,6 @@ services:
     container_name: bas_php
     volumes:
       - ./server:/usr/share/nginx/html
-    depends_on:
-      - mysql
     tty: true
   mysql:
     container_name: bas_mysql

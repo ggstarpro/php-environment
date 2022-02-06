@@ -25,13 +25,13 @@ RUN apk update \
 # 必要なモジュールインストール (PHP 8)
 RUN apk add --update --no-cache php8 php8-fpm php8-pdo_mysql \
   php8-curl \
-  php8-opcache php8-pdo_odbc php8-pdo_mysql php8-gd \
-  php8-pecl-apcu php8-mysqli php8-fpm \
-  php8-zip php8-curl php8-phar php8-sockets php8-dom \
+  php8-opcache php8-pdo_odbc php8-gd \
+  php8-pecl-apcu php8-mysqli \
+  php8-zip php8-phar php8-sockets php8-dom \
   php8-ftp php8-iconv php8-posix \
-  php8-session php8-sodium php8-sqlite3 php8-tokenizer \
+  php8-session php8-sodium php8-sqlite3 \
   php8-pear php8-pecl-imagick \
-  php8-bcmath  php8-ctype php8-fileinfo php8-json \
+  php8-bcmath php8-ctype php8-fileinfo php8-json \
   php8-mbstring php8-openssl php8-tokenizer \
   php8-xml php8-xmlreader php8-xmlwriter php8-simplexml \
   php8-intl
