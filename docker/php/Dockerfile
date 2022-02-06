@@ -1,6 +1,4 @@
 FROM alpine:3.15
-# php:8.0.10-fpm-alpine3.13
-# alpine:3.15
 
 # どこのフォルダの中でコマンドを実行するのかを記載
 WORKDIR /usr/share/nginx/html
