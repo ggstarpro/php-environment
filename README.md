@@ -2,13 +2,14 @@
 nginx:1.21.6-alpine
 alpine:3.15
 mysql:8.0.28
-
+minio:latest
+mailhog:latest
 
 # 環境構築手順
 * docker-compose up -d
 * docker exec -it bas_php bash
 * cd /usr/share/nginx/html
-* composer create-project laravel/laravel bas-app
+* composer create-project laravel/laravel bas-app (最初に作る人のみ)
 * cd bas-app
 * composer install
 * php artisan key:generate
@@ -22,7 +23,7 @@ DB_USERNAME=bas
 DB_PASSWORD=password
 ```
 * php artisan migrate
-* http://localhost/
+* http://localhost/ を表示確認
 
 
 # minioについて
@@ -32,12 +33,12 @@ DB_PASSWORD=password
   public function __construct()
   {
       $this->s3= new S3Client([
-          'version'     => 'latest',
-          'region'      => 'us-east-1',
+          'version' => 'latest',
+          'region' => 'us-east-1',
           'endpoint'=> 'http://bas-minio:9999',
           'use_path_style_endpoint' => true,
           'credentials' => [
-              'key'    => 'bas',
+              'key' => 'bas',
               'secret' => 'password',
           ],
       ]);

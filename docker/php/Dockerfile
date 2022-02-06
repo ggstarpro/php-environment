@@ -15,6 +15,8 @@ RUN apk update \
   && mkdir /run/openrc \
   && touch /run/openrc/softlevel
 
+# apk add nodejs
+# apk add npm
 # /etc/init.d/php-fpm8  start
 # rc-status
 # apk search php | grep ctype
@@ -54,7 +56,7 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
   && php composer-setup.php --install-dir=$composer_dir --filename=$composer_filename \
   # インストールした Composer のバージョン表示
   && composer -v | grep "Composer version" \
-  # unzip コマンド (composer create-project で必要)
+  # unzip コマンド
   && apk add unzip \
   && php -r "unlink('composer-setup.php');" \
   && chmod +x /usr/local/bin/composer
@@ -67,7 +69,6 @@ RUN apk --no-cache add tzdata && \
 
 COPY ./docker/php/www.conf /etc/php8/php-fpm.d/www.conf
 COPY ./docker/php/php.ini /etc/php8/php.ini
-# COPY ./docker/php/www.conf /etc/php-fpm.d/www.conf.default
 
 # php-fpmポート番号
 EXPOSE 9000

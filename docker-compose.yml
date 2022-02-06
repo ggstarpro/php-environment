@@ -1,4 +1,5 @@
 version: "3"
+
 services:
   nginx:
     container_name: bas_nginx
@@ -34,7 +35,7 @@ services:
       MYSQL_DATABASE: bas
       MYSQL_USER: bas
       MYSQL_PASSWORD: password
-      TZ: 'Asia/Tokyo'
+      TZ: "Asia/Tokyo"
     volumes:
       - ./docker/mysql/tmp:/tmp
       - ./docker/mysql/mysql:/var/lib/mysql
@@ -42,10 +43,12 @@ services:
     tty: true
   minio:
     container_name: bas_minio
-    image: 'minio/minio'
+    image: "minio/minio"
     environment:
-      MINIO_ROOT_USER: bas # MINIO_ACCESS_KEY
-      MINIO_ROOT_PASSWORD: password # # MINIO_SECRET_KEY
+      # MINIO_ACCESS_KEY
+      MINIO_ROOT_USER: bas
+      # MINIO_SECRET_KEY
+      MINIO_ROOT_PASSWORD: password
     entrypoint: bash
     # `--address :9999` で、MinIO の API のポートを指定しています
     # `--console-address :9001` でコンソールの ポートを指定しています。
@@ -53,13 +56,13 @@ services:
     volumes:
       - ./docker/minio/data:/export
     ports:
-      - '9000:9000'
-      - '9001:9001'
+      - "9000:9000"
+      - "9001:9001"
     tty: true
   mailhog:
     container_name: bas_mailhog
-    image: 'mailhog/mailhog'
+    image: "mailhog/mailhog"
     ports:
-      - '8025:8025'
+      - "8025:8025"
     tty:
       true
