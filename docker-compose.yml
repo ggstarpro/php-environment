@@ -41,7 +41,7 @@ services:
       - ./docker/mysql/initdb.d/:/docker-entrypoint-initdb.d
     tty: true
   minio:
-    container_name: bas-minio
+    container_name: bas_minio
     image: 'minio/minio'
     environment:
       MINIO_ROOT_USER: bas # MINIO_ACCESS_KEY
@@ -56,20 +56,10 @@ services:
       - '9000:9000'
       - '9001:9001'
     tty: true
-
-
-
-  # phpmyadmin:
-  #   image: phpmyadmin/phpmyadmin:latest
-  #   ports:
-  #     - 8888:80
-  #   depends_on:
-  #     - db
-  #
-
-# docker
-# * git hub に投げる
-# * s3 MinIO
-# * mailhog
-# * phpmyadmin
-# redis
+  mailhog:
+    container_name: bas_mailhog
+    image: 'mailhog/mailhog'
+    ports:
+      - '8025:8025'
+    tty:
+      true
